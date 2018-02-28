@@ -1,4 +1,4 @@
-import httpRequest                  from 'superagent';
+import httpRequest from 'superagent';
 
 const APIUtils = {
 
