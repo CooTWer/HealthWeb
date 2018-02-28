@@ -1,0 +1,38 @@
+.Mainpage-header {
+    position: fixed;
+    top: 0;
+    border-bottom: 1px black solid;
+    width:100%;
+    height:100px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.Mainpage-header-publish {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 50% 50%;
+    text-align: left;
+    line-height: 50px;
+}
+
+.Mainpage-header-publish img{
+    margin: auto 0;
+}
+
+.Mainpage-header-img{
+    display: grid;
+    grid-template-columns: 10% 90%;
+}
+
+.Mainpage-header-send{
+    margin-top: 25px;
+}
+
+.Mainpage-header-send div{
+    width: 25%;
+    height: 50%;
+    border: 1px black solid;
+    margin: 0 auto;
+    line-height: 40px;
+}
