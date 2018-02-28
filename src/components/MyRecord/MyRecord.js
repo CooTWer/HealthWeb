@@ -27,10 +27,42 @@ class MyRecord extends Component {
             </div>
             <div className="Message-section">
                 <div class="My-profile">
-                    <img src={Profile1}/>
+                    <img src={Profile2}/>
                 </div>
-                <table>
-                    <th></th>
+                <table className="My-record-table">
+                    <tr>
+                        <td className="Date-td">2018-01-25 16:00pm</td>
+                        <td className="Message-td">Fitness brought to me is not only the change of the body, more important is the mentality change</td>
+                        <td className="Images-td">
+                            <td><img src={muscle1}/></td>
+                            <td><img src={muscle2}/></td>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td className="Date-td">2017-12-25 16:00pm</td>
+                        <td className="Message-td">Weight loss need more aerobic exercise, diet, diet is the key</td>
+                    </tr>
+
+                    <tr>
+                        <td className="Date-td">2017-12-25 08:00am</td>
+                        <td className="Message-td">Fitness brought to me is not only the change of the body, more important is the mentality change</td>
+                        <td className="Images-td">
+                            <td><img src={muscle1}/></td>
+                            <td><img src={muscle2}/></td>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td className="Date-td">2017-12-1 16:00pm</td>
+                        <td className="Message-td">Started to lose weight</td>
+                        <td className="Images-td">
+                            <td><img src={muscle5}/></td>
+                            <td><img src={muscle4}/></td>
+                            <td><img src={muscle3}/></td>
+                        </td>
+                    </tr>
+
                 </table>
             </div>
         </div>
