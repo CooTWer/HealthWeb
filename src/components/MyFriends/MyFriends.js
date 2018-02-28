@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import constants from '../constants';
 import classNames from 'classnames';
 import './MyFriend.css';
+import UserTable from './UserTable';
 import {myFriendData} from '../../mockData';
 
 class MyFriends extends Component {
