@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import constants from '../constants';
 import classNames from 'classnames';
 import './MyFriend.css';
-import UserTable from './UserTable';
-import {myFriendData} from '../../mockData';
+import PeopleFollowMe from './../PeopleFollowMe/PeopleFollowMe';
+import PeopleIFollowed from './../PeopleIFollowed/PeopleIFollowed';
+import PeopleFollow from './../PeopleFollow/PeopleFollow';
+
 
 class MyFriends extends Component {
   state = {
@@ -27,20 +29,26 @@ class MyFriends extends Component {
   }
 
   renderUserList() {
-    const userList = this.getUserList();
-    return <UserTable userList={userList} />
-  }
-
-  getUserList() {
     switch (this.state.metrics) {
       case constants.myFriendMetrics.peopleFollowingMe:
-        return myFriendData.peopleFollowingMe;
+        return <PeopleFollowMe />;
       case constants.myFriendMetrics.myFriends:
-        return myFriendData.myFriends;
+        return <PeopleIFollowed />;
       default :
-        return myFriendData.peopleIFollow;
+        return <PeopleFollow/>;
     }
   }
+
+  // getUserList() {
+  //   switch (this.state.metrics) {
+  //     case constants.myFriendMetrics.peopleFollowingMe:
+  //       return myFriendData.peopleFollowingMe;
+  //     case constants.myFriendMetrics.myFriends:
+  //       return myFriendData.myFriends;
+  //     default :
+  //       return myFriendData.peopleIFollow;
+  //   }
+  // }
 
   showMetrics(key) {
     this.setState({

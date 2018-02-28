@@ -3,6 +3,7 @@ import './App.css';
 import Mainpage from './components/Mainpage/Mainpage';
 import MyRecord from './components/MyRecord/MyRecord';
 import MyFriends from './components/MyFriends/MyFriends';
+import Finding from './components/Finding/Finding';
 
 
 class App extends Component {
@@ -54,7 +55,7 @@ class App extends Component {
             <MyRecord/>
           </div>
           <div style={{"display": isBox3Show}}>
-            娱乐圈
+            <Finding/>
           </div>
           <div style={{"display": isBox4Show}}>
             <MyFriends />

@@ -57,9 +57,9 @@ class MyRecord extends Component {
                         <td className="Date-td">2017-12-1 16:00pm</td>
                         <td className="Message-td">Started to lose weight</td>
                         <td className="Images-td">
-                            <td><img src={muscle5}/></td>
+                            <td><img src={muscle2}/></td>
                             <td><img src={muscle4}/></td>
-                            <td><img src={muscle3}/></td>
+                            <td><img src={muscle5}/></td>
                         </td>
                     </tr>
 
