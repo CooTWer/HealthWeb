@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import constants from '../constants';
 import classNames from 'classnames';
 import './MyFriend.css';
+import {myFriendData} from '../../mockData';
 
 class MyFriends extends Component {
   state = {
@@ -25,7 +26,19 @@ class MyFriends extends Component {
   }
 
   renderUserList() {
+    const userList = this.getUserList();
+    return <UserTable userList={userList} />
+  }
 
+  getUserList() {
+    switch (this.state.metrics) {
+      case constants.myFriendMetrics.peopleFollowingMe:
+        return myFriendData.peopleFollowingMe;
+      case constants.myFriendMetrics.myFriends:
+        return myFriendData.myFriends;
+      default :
+        return myFriendData.peopleIFollow;
+    }
   }
 
   showMetrics(key) {
@@ -42,7 +55,6 @@ class MyFriends extends Component {
       </div>
     );
   }
-
 }
 
 export default MyFriends;
