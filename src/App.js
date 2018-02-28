@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Mainpage from './components/Mainpage/Mainpage';
 import MyRecord from './components/MyRecord/MyRecord';
+import MyFriends from './components/MyFriends/MyFriends';
 
 
 class App extends Component {
@@ -54,6 +55,9 @@ class App extends Component {
           </div>
           <div style={{"display": isBox3Show}}>
             娱乐圈
+          </div>
+          <div style={{"display": isBox4Show}}>
+            <MyFriends />
           </div>
         </div>
       </div>
