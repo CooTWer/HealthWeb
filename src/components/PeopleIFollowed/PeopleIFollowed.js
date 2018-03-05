@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
 import './PeopleIFollowed.css';
-import imgIcon from './../../resource/imgIcon.png';
 import httpMethod from '../HttpMethod/HttpMethod';
-import Profile1 from './../../resource/Profile1.jpeg';
-import Profile2 from './../../resource/profile2.jpeg';
-import Profile3 from './../../resource/profile3.jpeg';
-import muscle1 from './../../resource/muscle1.jpeg';
-import muscle2 from './../../resource/muscle2.jpeg';
-import muscle3 from './../../resource/muscle3.jpeg';
-import muscle4 from './../../resource/muscle4.jpeg';
-import muscle5 from './../../resource/muscle5.jpeg';
+import rp from 'request-promise';
+
 
 
 class PeopleIFollowed extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            peopleIFollow: null
+        };
+    }
 
     sendMessage = (id) => {
         this.setState({
@@ -24,17 +24,32 @@ class PeopleIFollowed extends Component {
         httpMethod.postMethod('localhost', '{"aaa":"BBB"}')
     }
 
+    componentDidMount = () => {
+        var _this = this;
+        rp(httpMethod.getFollowByStatus("('follow','friend')"))
+            .then(function (repos) {
+                _this.setState({peopleIFollow : repos})
+            })
+    }
+
     render() {
+        if (this.state.peopleIFollow == null){
+            return <div>Loading...</div>;
+        }
         return (
             <div>
                 <div className="Message-section">
                     <table className="Outer-table">
-                        <tr>
-                            <td><img src={Profile1}/></td>
-                            <td>
-                                <p>Jerry</p>
-                            </td>
-                        </tr>
+                            {
+                                this.state.peopleIFollow.map(function (item) {
+                                    return (
+                                        <tr>
+                                            <td><img src={item.Avatar}/></td>
+                                            <td>{item.Name}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
                     </table>
                 </div>
             </div>

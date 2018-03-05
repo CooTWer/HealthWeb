@@ -1,105 +1,108 @@
 import React, {Component} from 'react';
+import rp from 'request-promise';
 import './Mainpage.css';
 import imgIcon from './../../resource/imgIcon.png';
 import httpMethod from '../HttpMethod/HttpMethod';
-import Profile1 from './../../resource/Profile1.jpeg';
-import Profile2 from './../../resource/profile2.jpeg';
-import muscle1 from './../../resource/muscle1.jpeg';
-import muscle2 from './../../resource/muscle2.jpeg';
-import muscle3 from './../../resource/muscle3.jpeg';
-import muscle4 from './../../resource/muscle4.jpeg';
-import muscle5 from './../../resource/muscle5.jpeg';
+
 
 
 class Mainpage extends Component {
 
-    sendMessage = (id) => {
-        this.setState({
-            currentIndex: id
-        });
+    constructor(props) {
+        super(props);
+        this.state = {
+            userInfo: null
+        };
     }
 
+    componentDidMount = () => {
+        var _this = this;
+        rp(httpMethod.getUserInfo)
+            .then(function (repos) {
+                _this.setState({userInfo : repos})
+            })
+    }
+
+    js_yyyy_mm_dd_hh_mm_ss = () => {
+        var now = new Date();
+        var year = "" + now.getFullYear();
+        var month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+        var day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+        var hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+        var minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+        var second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
+        return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+}
+
     sendMessage = () => {
-        httpMethod.postMethod('localhost', '{"aaa":"BBB"}')
+        var myfile = document.getElementById('myfile');
+        var mytext = document.getElementById('mytext');
+        var fileName = 'http://localhost:3000/resource/';
+        var textValue = mytext.value;
+        if(myfile.files[0] != undefined){
+            fileName += myfile.files[0].name;
+        }
+        var myDate = this.js_yyyy_mm_dd_hh_mm_ss()
+        var _this = this;
+        rp(httpMethod.postMyMessage(textValue, fileName, myDate))
+            .then(function (repos) {
+                alert("Message has been published");
+            })
+        
+        // httpMethod.postMethod('http://localhost:8080/putMyAllMessage', '{"aaa":"BBB"}')
     }
 
     render() {
+        if (this.state.userInfo == null){
+            return <div>Loading...</div>;
+        }
+        console.log('this.state.userInfo : ', this.state.userInfo);
         return (
             <div>
                 <div className="Mainpage-header">
                     <div className="Mainpage-header-publish">
-                        <input type="text" placeholder="Type Here..."></input>
+                        <input id="mytext" type="text" placeholder="Type Here..."></input>
                         <div className="Mainpage-header-img">
                             <img src={imgIcon}/>
-                            <span>Click to add picture</span>
+                            <input id="myfile" type="file"></input>
                         </div>
                     </div>
                     <div className="Mainpage-header-send">
-                        <div onclick="sendMessage()">SEND</div>
+                        <button onClick={() => this.sendMessage()}>SEND</button>
                     </div>
                 </div>
                 <div className="Message-section">
                     <table className="Outer-table">
-                        <tr>
-                            <td><img src={Profile1}/></td>
-                            <td>
-                                <p>Fitness brought to me is not only the change of the body, more important is the mentality change</p>
-                            <table className="Message-inner-section">
-                                <tr>
-                                    <td><img src={muscle1}/></td>
-                                    <td><img src={muscle2}/></td>
-                                </tr>
-                            </table>
-                            </td>
-                        </tr>
 
-                        <tr>
-                            <td><img src={Profile2}/></td>
-                            <td>
-                                <p>Fitness brought to me is not only the change of the body, more important is the mentality change</p>
-                                <table className="Message-inner-section">
+                        {
+                            this.state.userInfo.map(function (item) {
+                                return (
                                     <tr>
-                                        <td><img src={muscle1}/></td>
-                                        <td><img src={muscle2}/></td>
+                                        <td><img src={item.Avatar}/></td>
+                                        <td>
+                                            <p>{item.Text}</p>
+
+                                            <table className="Message-inner-section">
+                                                <tr>
+                                                    {
+                                                        item.Image.split(',').map(function (image) {
+                                                            if (image != null){
+                                                                return (
+                                                                    <td><img src={image}/></td>
+                                                                )
+                                                            }
+                                                        })
+                                                    }
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <p>{item.Publish_Date}</p>
+                                        </td>
                                     </tr>
-                                </table>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><img src={Profile2}/></td>
-                            <td>
-                                <p>Weight loss need more aerobic exercise, diet, diet is the key</p>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><img src={Profile2}/></td>
-                            <td>
-                                <p>Fitness brought to me is not only the change of the body, more important is the mentality change</p>
-                                <table className="Message-inner-section">
-                                    <tr>
-                                        <td><img src={muscle1}/></td>
-                                        <td><img src={muscle2}/></td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><img src={Profile2}/></td>
-                            <td>
-                                <p>Started to lose weight</p>
-                                <table className="Message-inner-section">
-                                    <tr>
-                                        <td><img src={muscle2}/></td>
-                                        <td><img src={muscle4}/></td>
-                                        <td><img src={muscle5}/></td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-
+                                )
+                            })
+                        }
                     </table>
                 </div>
             </div>

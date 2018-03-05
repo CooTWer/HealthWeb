@@ -33,23 +33,12 @@ class MyFriends extends Component {
       case constants.myFriendMetrics.peopleFollowingMe:
         return <PeopleFollowMe />;
       case constants.myFriendMetrics.myFriends:
-        return <PeopleIFollowed />;
-      default :
         return <PeopleFollow/>;
+      default :
+        return <PeopleIFollowed />;
     }
   }
-
-  // getUserList() {
-  //   switch (this.state.metrics) {
-  //     case constants.myFriendMetrics.peopleFollowingMe:
-  //       return myFriendData.peopleFollowingMe;
-  //     case constants.myFriendMetrics.myFriends:
-  //       return myFriendData.myFriends;
-  //     default :
-  //       return myFriendData.peopleIFollow;
-  //   }
-  // }
-
+  
   showMetrics(key) {
     this.setState({
       metrics: constants.myFriendMetrics[key],

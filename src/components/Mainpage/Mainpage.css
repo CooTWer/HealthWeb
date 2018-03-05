@@ -72,3 +72,7 @@
 .Outer-table tr{
     border-bottom: 1px black solid;
 }
+
+.Mainpage-header-img input{
+    margin: auto 0;
+}
